@@ -2,3 +2,4 @@
 2026-11-01 20:42:00 - fix(jobs): ensure deadline validator prevents scheduling in the past
 2026-11-03 18:12:04 - refactor(candidates): improve application stage transition validation
 2026-11-03 21:05:50 - test(parser): add sample text extraction tests for pdf parser
+2026-11-04 19:20:30 - refactor(candidates): integrate ai match score computation into application model
