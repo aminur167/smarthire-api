@@ -4,3 +4,4 @@
 2026-11-03 21:05:50 - test(parser): add sample text extraction tests for pdf parser
 2026-11-04 19:20:30 - refactor(candidates): integrate ai match score computation into application model
 2026-11-08 16:15:40 - feat(tasks): add async match score calculator and email notification worker
+2026-11-08 19:40:15 - refactor(config): update django settings with celery beat and redis broker url
