@@ -8,3 +8,4 @@
 2026-11-08 21:30:00 - fix(tasks): handle missing pdf attachments gracefully in worker task
 2026-11-09 12:20:15 - feat(seed): add default departments and sample job postings
 2026-11-09 15:35:40 - feat(seed): populate mock candidates, applications, and scheduled interviews
+2026-11-09 18:50:22 - chore(seed): add superuser and recruiter demo credentials
