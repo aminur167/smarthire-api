@@ -6,3 +6,4 @@
 2026-11-08 16:15:40 - feat(tasks): add async match score calculator and email notification worker
 2026-11-08 19:40:15 - refactor(config): update django settings with celery beat and redis broker url
 2026-11-08 21:30:00 - fix(tasks): handle missing pdf attachments gracefully in worker task
+2026-11-09 12:20:15 - feat(seed): add default departments and sample job postings
