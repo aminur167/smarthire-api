@@ -10,3 +10,4 @@
 2026-11-09 15:35:40 - feat(seed): populate mock candidates, applications, and scheduled interviews
 2026-11-09 18:50:22 - chore(seed): add superuser and recruiter demo credentials
 2026-11-10 13:40:25 - fix(migrations): fix custom user foreign key references in candidates app
+2026-11-10 16:20:45 - refactor(models): optimize database indexes on job status and application stage
