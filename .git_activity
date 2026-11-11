@@ -14,3 +14,4 @@
 2026-11-10 19:15:30 - test(api): add smoke tests for auth and dashboard endpoints
 2026-11-10 21:45:10 - perf(queries): add select_related on job postings in application queryset
 2026-11-11 09:15:40 - refactor(accounts): sanitize token refresh response and user metadata
+2026-11-11 12:50:30 - refactor(jobs): add active department filtering for recruiter portal
