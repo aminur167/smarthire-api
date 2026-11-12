@@ -20,3 +20,4 @@
 2026-11-12 10:30:20 - feat(security): enable csrf, secure cookies, and password validators in production settings
 2026-11-12 13:15:45 - refactor(ai): tune matching algorithm weights for experience and technical skills
 2026-11-12 16:45:10 - fix(interviews): fix timezone offset serialization in interview datetime field
+2026-11-12 19:25:35 - feat(pagination): configure standardized pagination response across all viewsets
