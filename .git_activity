@@ -21,3 +21,4 @@
 2026-11-12 13:15:45 - refactor(ai): tune matching algorithm weights for experience and technical skills
 2026-11-12 16:45:10 - fix(interviews): fix timezone offset serialization in interview datetime field
 2026-11-12 19:25:35 - feat(pagination): configure standardized pagination response across all viewsets
+2026-11-12 21:10:00 - chore(logging): configure structured logging for celery tasks and api requests
