@@ -18,3 +18,4 @@
 2026-11-11 15:30:15 - feat(cors): configure cors headers for react frontend communication
 2026-11-11 18:40:50 - style(code): apply PEP-8 formatting across all django apps
 2026-11-12 10:30:20 - feat(security): enable csrf, secure cookies, and password validators in production settings
+2026-11-12 13:15:45 - refactor(ai): tune matching algorithm weights for experience and technical skills
