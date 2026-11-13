@@ -22,3 +22,4 @@
 2026-11-12 16:45:10 - fix(interviews): fix timezone offset serialization in interview datetime field
 2026-11-12 19:25:35 - feat(pagination): configure standardized pagination response across all viewsets
 2026-11-12 21:10:00 - chore(logging): configure structured logging for celery tasks and api requests
+2026-11-13 09:20:15 - feat(dashboard): add pipeline conversion rate and monthly hiring velocity stats
