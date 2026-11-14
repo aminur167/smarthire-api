@@ -28,3 +28,4 @@
 2026-11-13 18:15:50 - test(jobs): add unit tests for department vacancy counters
 2026-11-14 13:30:10 - docs: document celery worker and redis setup instructions
 2026-11-14 16:20:35 - refactor(settings): support both postgresql and sqlite with fallback
+2026-11-14 19:45:15 - chore(deps): update requirements.txt with frozen library versions
