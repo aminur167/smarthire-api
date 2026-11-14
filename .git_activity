@@ -29,3 +29,4 @@
 2026-11-14 13:30:10 - docs: document celery worker and redis setup instructions
 2026-11-14 16:20:35 - refactor(settings): support both postgresql and sqlite with fallback
 2026-11-14 19:45:15 - chore(deps): update requirements.txt with frozen library versions
+2026-11-14 21:30:00 - refactor(candidates): improve resume parser regex pattern matching for phone and email
