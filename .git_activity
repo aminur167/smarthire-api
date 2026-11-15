@@ -31,3 +31,4 @@
 2026-11-14 19:45:15 - chore(deps): update requirements.txt with frozen library versions
 2026-11-14 21:30:00 - refactor(candidates): improve resume parser regex pattern matching for phone and email
 2026-11-15 09:35:20 - perf(db): add database index on candidate application match_score
+2026-11-15 12:15:45 - fix(dashboard): resolve null pointer when department has zero active jobs
