@@ -33,3 +33,4 @@
 2026-11-15 09:35:20 - perf(db): add database index on candidate application match_score
 2026-11-15 12:15:45 - fix(dashboard): resolve null pointer when department has zero active jobs
 2026-11-15 15:50:30 - refactor(permissions): simplify recruiter and admin role permission hierarchy
+2026-11-15 18:30:10 - chore: clean up debug print statements and dead imports
