@@ -38,3 +38,4 @@
 2026-11-16 13:40:40 - fix(cors): add localhost:5173 to CORS_ALLOWED_ORIGINS
 2026-11-16 16:15:20 - docs: add api endpoint reference table and example curl commands to README
 2026-11-16 19:05:45 - test: run complete test suite and verify clean migration graph
+2026-11-16 21:20:00 - refactor: optimize query count on dashboard overview endpoint
