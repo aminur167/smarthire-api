@@ -35,3 +35,4 @@
 2026-11-15 15:50:30 - refactor(permissions): simplify recruiter and admin role permission hierarchy
 2026-11-15 18:30:10 - chore: clean up debug print statements and dead imports
 2026-11-16 10:25:15 - feat(api): verify rest api compatibility with react client
+2026-11-16 13:40:40 - fix(cors): add localhost:5173 to CORS_ALLOWED_ORIGINS
