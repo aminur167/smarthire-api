@@ -1,0 +1,59 @@
+services:
+  # Django Web Service
+  - type: web
+    name: smarthire-api
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py seed_data"
+    startCommand: "gunicorn smarthire.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: smarthire-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: smarthire-redis
+          property: connectionString
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://smarthire-client.vercel.app,http://localhost:5173"
+
+  # Background Celery Worker
+  - type: worker
+    name: smarthire-worker
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A smarthire.celery_app worker -l info"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: smarthire-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: smarthire-redis
+          property: connectionString
+
+# Managed PostgreSQL Database
+databases:
+  - name: smarthire-db
+    databaseName: smarthire
+    user: smarthire_user
+    plan: free
+
+# Managed Redis
+  - type: redis
+    name: smarthire-redis
+    ipAllowList: []
+    plan: free
