@@ -15,6 +15,7 @@ def api_root_view(request):
         "author": "Aminur Rahman",
         "endpoints": {
             "auth": "/api/v1/auth/token/",
+            "google_auth": "/api/v1/accounts/google/",
             "accounts": "/api/v1/accounts/",
             "jobs": "/api/v1/jobs/postings/",
             "candidates": "/api/v1/candidates/applications/",
