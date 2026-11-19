@@ -41,7 +41,8 @@ def calculate_match_score(
     reqs = _build_set(job_requirements)
 
     if not reqs:
-        return 100.0  # No requirements → perfect match by default
+        # An empty rubric is not evidence of a match.
+        return 0.0
     if not cand:
         return 0.0
 
@@ -68,6 +69,7 @@ def explain_match(
 
     return {
         "score": calculate_match_score(candidate_skills, job_requirements),
+        "scoring_available": bool(reqs),
         "matched_skills": sorted(matched),
         "missing_skills": sorted(missing),
         "extra_skills": sorted(extra),

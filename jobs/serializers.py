@@ -3,6 +3,7 @@
 from rest_framework import serializers
 from accounts.serializers import UserProfileSerializer
 from .models import Department, JobPosting
+from django.utils import timezone
 
 
 class DepartmentSerializer(serializers.ModelSerializer):
@@ -47,6 +48,16 @@ class JobPostingCreateSerializer(serializers.ModelSerializer):
             "salary_min", "salary_max", "openings", "deadline",
             "status", "skills_required",
         ]
+
+    def validate(self, attrs):
+        minimum = attrs.get("salary_min", getattr(self.instance, "salary_min", None))
+        maximum = attrs.get("salary_max", getattr(self.instance, "salary_max", None))
+        if minimum is not None and maximum is not None and minimum > maximum:
+            raise serializers.ValidationError({"salary_max": "Maximum salary must be greater than or equal to minimum salary."})
+        deadline = attrs.get("deadline", getattr(self.instance, "deadline", None))
+        if deadline and deadline < timezone.localdate() and self.instance is None:
+            raise serializers.ValidationError({"deadline": "Choose today or a future application deadline."})
+        return attrs
 
     def create(self, validated_data):
         validated_data["posted_by"] = self.context["request"].user

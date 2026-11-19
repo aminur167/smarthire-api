@@ -73,57 +73,5 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserListSerializer
     permission_classes = [IsAdmin]
     filterset_fields = ["role", "is_verified"]
-
-
-class GoogleAuthView(APIView):
-    """
-    Authenticate or register a user via Google OAuth2.
-    Issues real JWT access and refresh token pairs.
-    """
-    permission_classes = [permissions.AllowAny]
-
-    def post(self, request):
-        email = request.data.get("email")
-        if not email:
-            return Response(
-                {"detail": "Email is required for Google authentication."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        email = email.lower().strip()
-        first_name = request.data.get("first_name", "")
-        last_name = request.data.get("last_name", "")
-        role = request.data.get("role", User.Role.CANDIDATE)
-
-        # Look up existing user or create a new verified one
-        user, created = User.objects.get_or_create(
-            email=email,
-            defaults={
-                "first_name": first_name or email.split("@")[0].capitalize(),
-                "last_name": last_name,
-                "role": role if role in User.Role.values else User.Role.CANDIDATE,
-                "is_verified": True,
-            },
-        )
-
-        if not user.is_active:
-            return Response(
-                {"detail": "This user account has been deactivated."},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
-        # Generate standard SimpleJWT tokens
-        refresh = RefreshToken.for_user(user)
-        return Response(
-            {
-                "user": UserProfileSerializer(user).data,
-                "tokens": {
-                    "access": str(refresh.access_token),
-                    "refresh": str(refresh),
-                },
-                "is_new_user": created,
-            },
-            status=status.HTTP_200_OK,
-        )
     search_fields = ["email", "first_name", "last_name"]
     ordering_fields = ["date_joined", "email"]

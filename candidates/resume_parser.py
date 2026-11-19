@@ -51,9 +51,11 @@ def parse_resume(text: str) -> dict:
     linkedin_matches = _LINKEDIN_RE.findall(text)
 
     found_skills = []
-    text_lower = text.lower()
     for skill in _SKILL_KEYWORDS:
-        if skill.lower() in text_lower:
+        # Word boundaries prevent short terms such as "Go" or "Java" from
+        # matching inside unrelated words such as "Google" and "JavaScript".
+        pattern = rf"(?<![A-Za-z0-9]){re.escape(skill)}(?![A-Za-z0-9])"
+        if re.search(pattern, text, re.IGNORECASE):
             found_skills.append(skill)
 
     degrees = _DEGREE_RE.findall(text)

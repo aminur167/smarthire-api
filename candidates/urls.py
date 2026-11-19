@@ -12,5 +12,6 @@ app_name = "candidates"
 
 urlpatterns = [
     path("upload-resume/", views.ResumeUploadView.as_view(), name="upload-resume"),
+    path("applications/<int:application_id>/match/", views.ApplicationMatchView.as_view(), name="application-match"),
     path("", include(router.urls)),
 ]

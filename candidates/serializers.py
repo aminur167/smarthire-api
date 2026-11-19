@@ -1,6 +1,7 @@
 """Serializers for the candidates app."""
 
 from rest_framework import serializers
+from django.utils import timezone
 from accounts.serializers import UserProfileSerializer
 from jobs.serializers import JobPostingSerializer
 from .models import CandidateProfile, Application
@@ -22,12 +23,16 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     candidate_detail = UserProfileSerializer(source="candidate", read_only=True)
     job_detail = JobPostingSerializer(source="job", read_only=True)
+    match_scoring_available = serializers.SerializerMethodField()
+
+    def get_match_scoring_available(self, obj):
+        return bool(obj.job.skills_required)
 
     class Meta:
         model = Application
         fields = [
             "id", "candidate", "candidate_detail", "job", "job_detail",
-            "status", "cover_letter", "ai_match_score", "notes",
+            "status", "cover_letter", "ai_match_score", "match_scoring_available", "notes",
             "applied_at", "updated_at",
         ]
         read_only_fields = ["id", "candidate", "ai_match_score", "applied_at", "updated_at"]
@@ -41,6 +46,10 @@ class ApplicationCreateSerializer(serializers.ModelSerializer):
     def validate_job(self, value):
         if value.status != "PUBLISHED":
             raise serializers.ValidationError("This job is not currently accepting applications.")
+        if value.deadline < timezone.localdate():
+            raise serializers.ValidationError("The application deadline for this job has passed.")
+        if value.closed_count >= value.openings:
+            raise serializers.ValidationError("All openings for this job have been filled.")
         return value
 
     def validate(self, attrs):

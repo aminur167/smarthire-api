@@ -1,6 +1,7 @@
 """Views for the jobs app."""
 
 from rest_framework import viewsets, permissions
+from django.utils import timezone
 from accounts.permissions import IsAdminOrRecruiter
 from .models import Department, JobPosting
 from .serializers import DepartmentSerializer, JobPostingSerializer, JobPostingCreateSerializer
@@ -24,7 +25,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
 
     queryset = JobPosting.objects.select_related("department", "posted_by").all()
     filterset_class = JobPostingFilter
-    search_fields = ["title", "description", "location", "skills_required"]
+    search_fields = ["title", "description", "location"]
     ordering_fields = ["created_at", "deadline", "salary_min", "title"]
 
     def get_serializer_class(self):
@@ -39,7 +40,10 @@ class JobPostingViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        # Non-staff see only published jobs
-        if not self.request.user.is_authenticated or self.request.user.role == "CANDIDATE":
-            qs = qs.filter(status=JobPosting.Status.PUBLISHED)
+        user = self.request.user
+        if not user.is_authenticated or user.role == "CANDIDATE":
+            qs = qs.filter(status=JobPosting.Status.PUBLISHED, deadline__gte=timezone.localdate())
+        elif user.role == "RECRUITER":
+            # Until company workspaces are introduced, a recruiter owns their postings.
+            qs = qs.filter(posted_by=user)
         return qs

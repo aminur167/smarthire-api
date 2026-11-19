@@ -12,4 +12,5 @@ urlpatterns = [
     path("jobs-overview/", views.JobsOverviewView.as_view(), name="jobs-overview"),
     path("requests/", views.RequestsSummaryView.as_view(), name="requests"),
     path("activity/", views.RecentActivityView.as_view(), name="activity"),
+    path("reports/", views.ReportsView.as_view(), name="reports"),
 ]

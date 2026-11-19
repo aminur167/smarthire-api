@@ -21,6 +21,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, attrs):
+        if attrs.get("role", User.Role.CANDIDATE) not in (User.Role.CANDIDATE, User.Role.RECRUITER):
+            raise serializers.ValidationError({"role": "Choose Candidate or Recruiter. Admin access is assigned by an administrator."})
         if attrs["password"] != attrs.pop("password_confirm"):
             raise serializers.ValidationError({"password_confirm": "Passwords do not match."})
         return attrs
